@@ -1,12 +1,11 @@
 package main.Dash;
 
+import gameframework.game.GameData;
+import gameframework.game.GameEntity;
+
 import java.awt.Point;
 import java.util.Iterator;
 import java.util.Random;
-
-import gameframework.game.GameConfiguration;
-import gameframework.game.GameData;
-import gameframework.game.GameEntity;
 
 public class Camera {
 

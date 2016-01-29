@@ -1,34 +1,29 @@
 package main.Dash;
 
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import gameframework.drawing.Drawable;
 import gameframework.drawing.DrawableImage;
 import gameframework.drawing.GameCanvas;
-import gameframework.drawing.SpriteManagerDefaultImpl;
 import gameframework.game.GameData;
 import gameframework.game.GameEntity;
 import gameframework.motion.GameMovable;
-import gameframework.motion.MoveStrategy;
-import gameframework.motion.MoveStrategyKeyboard8Dir;
 import gameframework.motion.blocking.MoveBlocker;
-import gameframework.motion.overlapping.Overlappable;
+
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 
 public class Player extends GameMovable implements GameEntity,Drawable,MoveBlocker{
 
 	private SpriteManagerDash sprite;
-	private int anime=0;
-	private boolean animenormal=false;
-	private int saut;
-	private boolean ontheground;
-	DrawableImage image;
-	//private GameCanvas gameCanvas;
 	
+	private int anime=0;
+	
+	private boolean animenormal=false;
+	
+	private boolean ontheground;
+	
+	private DrawableImage image;
 	
 	public Player(GameCanvas gameCanvas,GameData data) {
 		super();

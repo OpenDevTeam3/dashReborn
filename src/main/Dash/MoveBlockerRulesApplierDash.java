@@ -4,11 +4,6 @@ import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
 
 
 public class MoveBlockerRulesApplierDash extends MoveBlockerRulesApplierDefaultImpl {
-
-	public void moveBlockerRule(Player movable, Terrain blocker){
-		movable.getPosition().y=(int) (blocker.getPosition().y-movable.getBoundingBox().getHeight());
-		movable.setOntheground(true);
-	}
 	
 	public void moveBlockerRule(Player movable, BlockTerrain blocker){
 		movable.getSpeedVector().getDirection().y=0;
@@ -27,9 +22,8 @@ public class MoveBlockerRulesApplierDash extends MoveBlockerRulesApplierDefaultI
 		blocker.addscore();
 	}
 	
-	
 	public void moveBlockerRule(BlockTerrain movable, Player blocker){
-	System.out.println("dead");
+		System.out.println("dead");
 	}
 	
 	public void moveBlockerRule(BlockTerrain movable, BlockTerrain blocker){

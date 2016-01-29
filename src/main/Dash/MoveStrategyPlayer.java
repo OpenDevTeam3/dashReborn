@@ -1,12 +1,11 @@
 package main.Dash;
 
-import java.awt.Point;
-import java.awt.event.KeyEvent;
-
 import gameframework.game.GameData;
-import gameframework.motion.MoveStrategy;
 import gameframework.motion.MoveStrategyKeyboard;
 import gameframework.motion.SpeedVector;
+
+import java.awt.Point;
+import java.awt.event.KeyEvent;
 
 
 public class MoveStrategyPlayer extends MoveStrategyKeyboard {
