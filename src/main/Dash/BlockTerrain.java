@@ -32,14 +32,12 @@ public class BlockTerrain implements Overlappable,GameEntity,MoveBlocker{
 	@Override
 	public void draw(Graphics g) {
 		sprite.setType(type);
-		
-	 	sprite.draw(g, new Point(position.x-Camera.getInstance().getX(),position.y-Camera.getInstance().getY()));
-		
+	 	sprite.draw(g, new Point(position.x-Camera.getInstance().getX(),position.y-Camera.getInstance().getY()));	
 	}
 	
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(position.x,position.y,150, 150);
+		return new Rectangle(position.x,position.y, 64, 64);
 	}
 
 	public SpriteManagerUniqueTextureDash getSpriteBlockTerrainManager(){

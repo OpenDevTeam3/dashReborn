@@ -27,5 +27,7 @@ public class MoveBlockerRulesApplierDash extends MoveBlockerRulesApplierDefaultI
 	}
 	
 	public void moveBlockerRule(BlockTerrain movable, BlockTerrain blocker){
+		
 	}
+	
 }

@@ -24,8 +24,10 @@ public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 		
 		int x = speedVector.getDirection().x;
 		int y = speedVector.getDirection().y;
+		
 		int oldX=x;
 		int oldY=y;
+		
 		switch (keyCode) {
 			case KeyEvent.VK_SPACE:
 				if(player.isOntheground())
@@ -56,19 +58,7 @@ public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 	 */
 	@Override
 	public void keyReleased(int keyCode) {
-		/*int x = speedVector.getDirection().x;
-		int y = speedVector.getDirection().y;
-		switch (keyCode) {
-		case KeyEvent.VK_RIGHT:
-			x=0;
-			break;
-		case KeyEvent.VK_LEFT:
-			x=0;
-			break;
-		default:
-			return;
-		}
-		move(new Point(x, y));*/
+		
 	}
 
 }
