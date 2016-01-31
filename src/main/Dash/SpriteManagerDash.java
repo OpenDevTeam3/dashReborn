@@ -22,10 +22,10 @@ public class SpriteManagerDash implements SpriteManager{
 	private int aftertype;
 	private int decalage;
 	
-	public SpriteManagerDash(DrawableImage image, int renderingSize,int maxSpriteNumber,int decalage) {
+	/*public SpriteManagerDash(DrawableImage image, int renderingSize,int maxSpriteNumber,int decalage) {
 		this(image, renderingSize,maxSpriteNumber);
 		this.decalage=decalage;
-	}
+	}*/
 
 
 	public SpriteManagerDash(DrawableImage image, int renderingSize,
@@ -81,7 +81,7 @@ public class SpriteManagerDash implements SpriteManager{
 				null);
 	}
 	
-	public void animation(String type,String aftertype){
+	/*public void animation(String type,String aftertype){
 		if (!types.containsKey(type) && !types.containsKey(aftertype)) {
 			throw new IllegalArgumentException(type
 					+ " is not a valid type for this sprite manager.");
@@ -89,7 +89,7 @@ public class SpriteManagerDash implements SpriteManager{
 		this.aftertype = types.get(aftertype);
 		this.currentRow = types.get(type);
 		modeanimation=true;
-	}
+	}*/
 
 	@Override
 	public void setType(String type) {

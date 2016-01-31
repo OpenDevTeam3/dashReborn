@@ -44,10 +44,10 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		
 		
 		//this.gameCanvas=gameCanvas;
-		image = new DrawableImage("../../playersprite.png", gameCanvas);
+		image = new DrawableImage("../../spriteBOB.png", gameCanvas);
 		
 		this.sprite = new SpriteManagerDash(image, 128, 8);
-		this.sprite.setTypes("normal","1","2","course");
+		this.sprite.setTypes("course","saut");
 		this.sprite.setType("course");
 		
 		setPosition(new Point(100, 50));
@@ -62,7 +62,7 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	@Override
 	public void draw(Graphics g) {
 		
-		sprite.draw(g, new Point(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY()),46,50);
+		sprite.draw(g, new Point(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY()),40,40);
 		
 		// hit box
 		g.drawRect(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY(),64, 128);
@@ -83,7 +83,7 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	
 	public int jump() {
 		this.ontheground=false;
-		sprite.setType("2");
+		sprite.setType("saut");
 		sprite.reset();
 		animenormal=true;
 		anime=0;

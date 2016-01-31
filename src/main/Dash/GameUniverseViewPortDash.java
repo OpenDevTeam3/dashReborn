@@ -28,7 +28,7 @@ public class GameUniverseViewPortDash implements GameUniverseViewPort {
 	}
 
 	protected URL backgroundImage() {
-		return backgroundImage("paysage.jpg");
+		return backgroundImage("../../paysage.jpg");
 	}
 
 	@Override
