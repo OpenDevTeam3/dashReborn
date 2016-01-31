@@ -1,0 +1,43 @@
+Bugs :
+
+ - Les piques sont à l'envers dans les patterns
+ - Le joueur se retrouve au sommet du bloc dès qu'il entre en collision
+ - le joueur "tombe" dans les plateformes de temps en temps
+ - La hitbox du joueur ne corresponds pas à son image **FIXED**
+ - le joueur peut parfois faire des double sauts 
+ - des fois le jeu crash au lancement :
+ - donner le focus au canvas **FIXED**
+ 
+ 	Exception in thread "main" java.lang.IllegalArgumentException: Width (81) and height (0) cannot be <= 0
+	at java.awt.image.DirectColorModel.createCompatibleWritableRaster(DirectColorModel.java:1016)
+	at sun.java2d.opengl.CGLGraphicsConfig.createAcceleratedImage(CGLGraphicsConfig.java:274)
+	at sun.lwawt.LWComponentPeer.createImage(LWComponentPeer.java:993)
+	at java.awt.Component.createImage(Component.java:3574)
+	at gameframework.drawing.GameCanvasDefaultImpl.createBuffer(GameCanvasDefaultImpl.java:20)
+	at main.Dash.GameUniverseViewPortDash.setGameData(GameUniverseViewPortDash.java:57)
+	at main.Dash.GameUniverseViewPortDash.<init>(GameUniverseViewPortDash.java:27)
+	at main.Dash.GameLevelDash.init(GameLevelDash.java:15)
+	at gameframework.game.GameLevelDefaultImpl.start(GameLevelDefaultImpl.java:34)
+	at gameframework.game.GameDefaultImpl.start(GameDefaultImpl.java:31)
+	at main.Dash.DashWindow.<init>(DashWindow.java:25)
+	at main.Dash.DashWindow.main(DashWindow.java:33)
+ 
+Configuration :
+
+ - Configurer maven sur le projet
+
+Code : 
+
+ - Améliorer la qualité du code
+ - Ajouter des commentaires
+ - Tester le code
+ 
+Fonctionnalités :
+
+ - Mettre les images pour les pièces
+ - Faire en sorte que le joueur meurt quand il touche un pique ou tombe dans le vide
+ - Revenir au menu quand le joueur meurt
+ - Ajouter un menu
+ - Pouvoir quitter le jeu
+ - Pouvoir varier la longueur du saut (si on garde espace enfoncé)
+ - Certains patterns ne sont pas cohérents/sont trop difficiles/ont des problèmes d'images
