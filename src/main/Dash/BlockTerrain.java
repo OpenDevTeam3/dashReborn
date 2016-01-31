@@ -13,35 +13,39 @@ import java.awt.Rectangle;
 
 public class BlockTerrain implements Overlappable,GameEntity,MoveBlocker{
 	
-	private static SpriteManagerUniqueTextureDash sprite;
-	private String type;
+	private static SpriteManagerVariationTextureDash sprite;
 	
-	private Point position;
+	protected Point position;
 	protected GameData data;
+	protected String idBlock;
+	protected int variation;
 	
-	public BlockTerrain(GameData data,String type,Point p){
+	public BlockTerrain(GameData data,String idBlock,int variation,int x,int j){
 		if(sprite==null){
-			sprite = new SpriteManagerUniqueTextureDash(new DrawableImage("../../platforme.png", data.getCanvas()),50, 4,4);
-			sprite.setTypes("herbe","terre","roche","pic");
+			sprite = new SpriteManagerVariationTextureDash(new DrawableImage("../../platforme.png", data.getCanvas()),64, 4,4);
+			sprite.setTypes("1","4","3","2");
 		}
-		this.type=type;
-		this.position = p;
+		this.idBlock=idBlock;
+		this.variation=variation;
 		this.data=data;
+		this.position=new Point(x, j);
+	}
+	
+	public void setPositionCamera(int x){
+		position.x=position.x+x;
 	}
 	
 	@Override
 	public void draw(Graphics g) {
-		sprite.setType(type);
-	 	sprite.draw(g, new Point(position.x-Camera.getInstance().getX(),position.y-Camera.getInstance().getY()));	
+		sprite.setType(idBlock,variation);
+		
+	 	sprite.draw(g, new Point(position.x-Camera.getInstance().getX(),position.y-Camera.getInstance().getY()));
+		
 	}
 	
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(position.x,position.y, 64, 64);
-	}
-
-	public SpriteManagerUniqueTextureDash getSpriteBlockTerrainManager(){
-		return sprite;
+		return new Rectangle(position.x,position.y,64, 64);
 	}
 
 	@Override
@@ -52,6 +56,10 @@ public class BlockTerrain implements Overlappable,GameEntity,MoveBlocker{
 	@Override
 	public Point getPosition() {
 		return position;
+	}
+
+	public BlockTerrain duplique() {
+		return new BlockTerrain( data, idBlock, variation, position.x, position.y);
 	}
 	
 }

@@ -50,7 +50,7 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(getPosition().x,getPosition().y, 64, 128);
+		return new Rectangle(getPosition().x+32,getPosition().y, 64, 128);
 	}
 	
 	
@@ -60,7 +60,7 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		sprite.draw(g, new Point(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY()),40,40);
 		
 		// hit box
-		g.drawRect(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY(),64, 128);
+		g.drawRect(getPosition().x-Camera.getInstance().getX()+32,getPosition().y-Camera.getInstance().getY(),64, 128);
 	}
 
 	

@@ -2,13 +2,15 @@ package main.Dash;
 
 import gameframework.game.GameData;
 
-import java.awt.Point;
-
 
 public class BlockTerrainDie extends BlockTerrain {
 
-	public BlockTerrainDie(GameData data, String type, Point p) {
-		super(data, type, p);
+	public BlockTerrainDie(GameData data, String idBlock, int variation, int x,
+			int j) {
+		super(data, idBlock, variation, x, j);
 	}
 
+	public BlockTerrain duplique() {
+		return new BlockTerrainDie( data, idBlock, variation, position.x, position.y);
+	}
 }
