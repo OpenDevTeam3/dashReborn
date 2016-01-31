@@ -11,14 +11,14 @@ public class Camera {
 	private GameData data;
 	private int speed;
 	private GenerateurTerrain generateurTerrain;
-	private static Camera instance=new Camera();
+	
+	private static Camera instance = new Camera();
 	
 	public static void setData(GameData data) {
 		instance.data = data;
 		instance.speed = ((ConfigurationDash)data.getConfiguration()).getVitesse();
 		instance.position = new Point(0,0);
-		instance.generateurTerrain = new GenerateurTerrain(data);
-				
+		instance.generateurTerrain = new GenerateurTerrain(data);			
 	}
 	
 	public int getX() {
@@ -42,23 +42,18 @@ public class Camera {
 	}
 
 	public void moveCamera() {
-		position.x+=speed;
 		
 		Iterator<GameEntity> gt = data.getUniverse().getGameEntitiesIterator();
-		int nbblock=0;
-		for (; gt.hasNext();) {
-			nbblock++;
+		while(gt.hasNext()){
 			GameEntity tmp = gt.next();
-			if(tmp instanceof BlockTerrain)
-			System.out.println(((BlockTerrain) tmp).getPosition().x+" "+position.x);
 			if(tmp instanceof BlockTerrain && ((BlockTerrain) tmp).getPosition().x+500<position.x){
-				System.out.println("supprime :" + position.x);
-				System.out.println(tmp);
 				data.getUniverse().removeGameEntity(tmp);
+			}else if(tmp instanceof Player){
+				position.x+=((Player)tmp).getSpeedVector().getDirection().x*speed;
+				position.y=((Player)tmp).getPosition().y-300;
 			}
 		}
 		generateurTerrain.generate(position.x);
-		//System.out.println("nbblock : "+nbblock);
 	}
 	
 	

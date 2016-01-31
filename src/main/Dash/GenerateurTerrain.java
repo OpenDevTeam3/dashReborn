@@ -17,6 +17,10 @@ public class GenerateurTerrain {
 	
 	public GenerateurTerrain(GameData data) {
 		this.data=data;
+		
+		patternTerrains.add(new PatternTerrain("pattern_m1.csv", data));
+		
+		/*
 		patternTerrains.add(new PatternTerrain("pattern_m2.csv", data));
 		patternTerrains.add(new PatternTerrain("pattern_m3.csv", data));
 		patternTerrains.add(new PatternTerrain("pattern_m4.csv", data));
@@ -30,13 +34,11 @@ public class GenerateurTerrain {
 		patternTerrains.add(new PatternTerrain("plateforme_b7.csv", data));
 		patternTerrains.add(new PatternTerrain("plateforme_b8.csv", data));
 		patternTerrains.add(new PatternTerrain("plateforme_b9.csv", data));
-
+		 */
 	}
 	
 	public void generate(int x) {
-		System.out.println("camera : "+x);
-		System.out.println("dejaGenere : "+dejaGenere);
-
+	
 		if(x+LARGEUR_GENERE>dejaGenere){
 			generateTerrain(patternTerrains.get(r.nextInt(patternTerrains.size())));
 		}
@@ -49,7 +51,6 @@ public class GenerateurTerrain {
 		while(bt.hasNext()) {
 			block=bt.next();
 			block.setPositionCamera(dejaGenere);
-			System.out.println(block.getPosition());
 			data.getUniverse().addGameEntity(block);
 		}
 		dejaGenere+=30*64;

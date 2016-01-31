@@ -22,8 +22,8 @@ public class BlockTerrain implements Overlappable,GameEntity,MoveBlocker{
 	
 	public BlockTerrain(GameData data,String idBlock,int variation,int x,int j){
 		if(sprite==null){
-			sprite = new SpriteManagerVariationTextureDash(new DrawableImage("../../platforme.png", data.getCanvas()),64, 4,4);
-			sprite.setTypes("1","4","3","2");
+			sprite = new SpriteManagerVariationTextureDash(new DrawableImage("../../tileset.png", data.getCanvas()),64, 6, 4);
+			sprite.setTypes("1","2","3","4");
 		}
 		this.idBlock=idBlock;
 		this.variation=variation;

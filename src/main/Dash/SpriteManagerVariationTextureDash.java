@@ -1,13 +1,12 @@
 package main.Dash;
 
+import gameframework.drawing.DrawableImage;
+import gameframework.drawing.SpriteManager;
+
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
-
-import gameframework.drawing.DrawableImage;
-import gameframework.drawing.SpriteManager;
-import gameframework.drawing.SpriteManagerDefaultImpl;
 
 
 public class SpriteManagerVariationTextureDash implements SpriteManager{

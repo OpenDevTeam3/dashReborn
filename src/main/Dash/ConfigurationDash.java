@@ -15,7 +15,7 @@ public class ConfigurationDash extends GameConfiguration{
 	}
 	
 	public int getVitesse(){
-		return 20;
+		return 1;
 	}
 
 }

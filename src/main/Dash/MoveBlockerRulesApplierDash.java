@@ -5,29 +5,27 @@ import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
 
 public class MoveBlockerRulesApplierDash extends MoveBlockerRulesApplierDefaultImpl {
 	
-	public void moveBlockerRule(Player movable, BlockTerrain blocker){
-		movable.getSpeedVector().getDirection().y=0;
-		movable.getPosition().y=(int) (blocker.getPosition().y-movable.getBoundingBox().getHeight());
-		movable.setOntheground(true);
+	/**
+	 * Gere la collision entre un joueur et un bloc de terrain.
+	 * 
+	 * @param player le joueur
+	 * @param blocker le bloc de terrain
+	 */
+	public void moveBlockerRule(Player player, BlockTerrain blocker){
+		player.getSpeedVector().getDirection().y=0;
+		player.getPosition().y=(int) (blocker.getPosition().y-player.getBoundingBox().getHeight());
+		
+		//permet au joueur de sauter à nouveau
+		player.setOntheground();
 	}
 	
-	public void moveBlockerRule(Player movable, BlockTerrainDie blocker){
-		movable.getSpeedVector().getDirection().y=0;
-		movable.getPosition().y=(int) (blocker.getPosition().y-movable.getBoundingBox().getHeight());
-		movable.setOntheground(true);
-		System.out.println("die");
+	public void moveBlockerRule(Player player, BlockTerrainDie blocker){
+		System.exit(0);
 	}
 	
 	public void moveBlockerRule(Player movable, Piece blocker){
 		blocker.addscore();
 	}
 	
-	public void moveBlockerRule(BlockTerrain movable, Player blocker){
-		System.out.println("dead");
-	}
-	
-	public void moveBlockerRule(BlockTerrain movable, BlockTerrain blocker){
-		
-	}
 	
 }

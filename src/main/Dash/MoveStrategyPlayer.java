@@ -13,7 +13,7 @@ public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 	private Player player;
 
 	public MoveStrategyPlayer(Player player,GameData data) {
-		super(new SpeedVector(new Point(1, 1)));
+		super(new SpeedVector(new Point(24, 0)));
 		int vitesse =((ConfigurationDash)data.getConfiguration()).getVitesse();
 		setSpeed(vitesse);
 		this.player=player;
@@ -30,8 +30,10 @@ public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 		
 		switch (keyCode) {
 			case KeyEvent.VK_SPACE:
-				if(player.isOntheground())
+				if(player.isOntheGround()){
 					y=player.jump();
+					player.slow = true;
+				}
 				break;
 			default:
 				return;
@@ -58,7 +60,13 @@ public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 	 */
 	@Override
 	public void keyReleased(int keyCode) {
-		
+		switch(keyCode){
+			case KeyEvent.VK_SPACE:
+				player.slow = false;
+				break;
+			default:
+				return;
+		}
 	}
 
 }

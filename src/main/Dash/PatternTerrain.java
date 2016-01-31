@@ -52,10 +52,8 @@ public class PatternTerrain {
 			case "2":
 				return new BlockTerrainDie(data, idblock, variable,x,y);
 			case "3":
-				return new BlockTerrainDie(data, idblock, variable,x,y);
+				return new BlockTerrain(data, idblock, variable,x,y);
 			case "4":
-				/*if(variable==3)
-					return new BlockTerrainDie(data, idblock, variable,x,y);*/
 				return new BlockTerrain(data, idblock, variable,x,y);
 			case "5":
 				return null;//new Piece(data, idblock, variable,x,y);
