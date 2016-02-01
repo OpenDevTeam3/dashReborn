@@ -1,10 +1,16 @@
 package dash;
 
+import gameframework.assets.Sound;
 import gameframework.drawing.GameCanvas;
 import gameframework.game.GameData;
 import gameframework.game.GameDefaultImpl;
 import gameframework.game.GameLevel;
 import gameframework.gui.GameWindow;
+
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class DashWindow extends GameWindow{
@@ -25,6 +31,15 @@ public class DashWindow extends GameWindow{
 		Player player = new Player(gameCanvas,data);
 		data.getUniverse().addGameEntity(player);
 		
+		/*try {
+			new Sound("../../andhisnameis.aiff").play();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}*/
 		game.start();
 		
 	}

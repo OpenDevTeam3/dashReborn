@@ -18,23 +18,7 @@ public class GenerateurTerrain {
 	public GenerateurTerrain(GameData data) {
 		this.data=data;
 		
-		patternTerrains.add(new PatternTerrain("pattern_m1.csv", data));
-		
-		/*
-		patternTerrains.add(new PatternTerrain("pattern_m2.csv", data));
-		patternTerrains.add(new PatternTerrain("pattern_m3.csv", data));
-		patternTerrains.add(new PatternTerrain("pattern_m4.csv", data));
-
-		patternTerrains.add(new PatternTerrain("plateforme_b1.csv", data));
-		patternTerrains.add(new PatternTerrain("plateforme_b2.csv", data));
-		patternTerrains.add(new PatternTerrain("plateforme_b3.csv", data));
-		patternTerrains.add(new PatternTerrain("plateforme_b4.csv", data));
-		patternTerrains.add(new PatternTerrain("plateforme_b5.csv", data));
-		patternTerrains.add(new PatternTerrain("plateforme_b6.csv", data));
-		patternTerrains.add(new PatternTerrain("plateforme_b7.csv", data));
-		patternTerrains.add(new PatternTerrain("plateforme_b8.csv", data));
-		patternTerrains.add(new PatternTerrain("plateforme_b9.csv", data));
-		 */
+		patternTerrains.add(new PatternTerrain("pattern7.csv", data));
 	}
 	
 	public void generate(int x) {

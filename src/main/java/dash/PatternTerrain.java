@@ -47,15 +47,15 @@ public class PatternTerrain {
 			case "0":
 				return null;
 			case "1":
-				return new BlockTerrain(data, idblock, variable,x,y);
 			case "2":
-				return new BlockTerrainDie(data, idblock, variable,x,y);
 			case "3":
 				return new BlockTerrain(data, idblock, variable,x,y);
 			case "4":
-				return new BlockTerrain(data, idblock, variable,x,y);
+				return new BlockTerrainDie(data, idblock, variable,x,y);
 			case "5":
 				return null;//new Piece(data, idblock, variable,x,y);
+			case "6":
+				return new BlockJohnCena(data, idblock, variable, x, y);
 		}
 		return null;
 	}

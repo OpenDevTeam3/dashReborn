@@ -22,18 +22,16 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	
 	private boolean animenormal=false;
 	
-	private boolean ontheground;
-	
-	public boolean slow;
+	protected boolean ontheground, slow;
 	
 	private DrawableImage image;
+	
 	
 	private Point2D.Double acceleration;
 	
 	public Player(GameCanvas gameCanvas,GameData data) {
 		super();
 		ontheground=false;
-		
 		slow = false;
 		
 		MoveStrategyPlayer moveStrategy=new MoveStrategyPlayer(this,data);
@@ -53,7 +51,7 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		this.sprite.setType("course");
 		this.acceleration = new Point2D.Double(0, 0);
 		
-		setPosition(new Point(100, 400));
+		setPosition(new Point(500, 300));
 	}
 	
 	@Override
@@ -68,7 +66,14 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		sprite.draw(g, new Point(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY()),40,40);
 		
 		// hit box
-		//g.drawRect(getPosition().x-Camera.getInstance().getX()+32,getPosition().y-Camera.getInstance().getY(),64, 128);
+		g.drawRect(getPosition().x-Camera.getInstance().getX()+32,getPosition().y-Camera.getInstance().getY(),64, 128);
+	}
+	
+	@Override
+	public void oneStepMove(){
+		ontheground = false;
+		super.oneStepMove();
+		System.out.println(position.x);
 	}
 	
 	@Override
@@ -85,9 +90,13 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		this.sprite.increment();	
 	}
 
-	private void applyGravity() {		
-		this.acceleration.y+=0.2;
-		this.getSpeedVector().getDirection().y+=this.acceleration.y;
+	private void applyGravity() {	
+		if(slow){
+			this.acceleration.y+=0.1;
+		}else{			
+			this.acceleration.y+=0.5;
+		}
+		this.getSpeedVector().getDirection().y+=Math.ceil(this.acceleration.y);			
 	}
 
 	public int jump() {
@@ -106,6 +115,10 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	public void setOntheground() {
 		this.ontheground=true;
 		this.acceleration.y=0;
+	}
+	
+	public void kill(){
+		sprite.setType("saut");
 	}
 	
 }
