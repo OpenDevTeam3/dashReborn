@@ -38,26 +38,30 @@ public class PatternTerrain {
 	}
 
 	private BlockTerrain createblock(String s,GameData data,int x,int y) {
-		String idblock=s.split(",")[0];
-		int variable=0;
-		if(s.split(",").length>1)
-			variable =Integer.parseInt(s.split(",")[1]);
-		
-		switch(idblock){
-			case "0":
-				return null;
-			case "1":
-			case "2":
-			case "3":
-				return new BlockTerrain(data, idblock, variable,x,y);
-			case "4":
-				return new BlockTerrainDie(data, idblock, variable,x,y);
-			case "5":
-				return null;//new Piece(data, idblock, variable,x,y);
-			case "6":
-				return new BlockJohnCena(data, idblock, variable, x, y);
-		}
-		return null;
+		String idblock=s.split(",")[0].split(":")[0];
+		  int variable=0;
+		  int isWall=0;
+		  if(s.split(",").length>1)
+		   variable =Integer.parseInt(s.split(",")[1].split(":")[0]);
+		  if(s.split(":").length>1)
+		   isWall =Integer.parseInt(s.split(":")[1]);
+		  switch(idblock){
+		   case "0":
+		    return null;
+		   case "1":
+		   case "2":
+		   case "3":
+		    if(isWall==1)
+		     return new BlockTerrainWall(data, idblock, variable, x, y);
+		    return new BlockTerrain(data, idblock, variable,x,y);
+		   case "4":
+		    return new BlockTerrainDie(data, idblock, variable,x,y);
+		   case "5":
+		    return new Piece(data, idblock, variable,x,y);
+		   case "6":
+		    return new BlockJohnCena(data, idblock, variable, x, y);
+		  }
+		  return null;
 	}
 	
 	public ArrayList<BlockTerrain> getPatern() {

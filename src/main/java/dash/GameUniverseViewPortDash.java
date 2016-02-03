@@ -37,10 +37,16 @@ public class GameUniverseViewPortDash implements GameUniverseViewPort {
 		background.draw(getBufferGraphics());
 		Iterator<GameEntity> gt = getUniverse().getGameEntitiesIterator();
 		Camera.getInstance().moveCamera();
+		Player player = null;
 		for (; gt.hasNext();) {
 			GameEntity tmp = gt.next();
-			tmp.draw(getBufferGraphics());
+			if(tmp instanceof Player){
+				player = (Player) tmp;
+			}else{
+				tmp.draw(getBufferGraphics());
+			}
 		}
+		player.draw(getBufferGraphics());
 		refresh();
 	}
 	

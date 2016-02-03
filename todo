@@ -1,12 +1,7 @@
 Bugs :
 
- - Les piques sont à l'envers dans les patterns
- - Le joueur se retrouve au sommet du bloc dès qu'il entre en collision
- - le joueur "tombe" dans les plateformes de temps en temps
- - La hitbox du joueur ne corresponds pas à son image **FIXED**
- - le joueur peut parfois faire des double sauts 
+ - bug d'affichage du score des pièces
  - des fois le jeu crash au lancement :
- - donner le focus au canvas **FIXED**
  
  	Exception in thread "main" java.lang.IllegalArgumentException: Width (81) and height (0) cannot be <= 0
 	at java.awt.image.DirectColorModel.createCompatibleWritableRaster(DirectColorModel.java:1016)
@@ -22,9 +17,6 @@ Bugs :
 	at main.Dash.DashWindow.<init>(DashWindow.java:25)
 	at main.Dash.DashWindow.main(DashWindow.java:33)
  
-Configuration :
-
- - Configurer maven sur le projet
 
 Code : 
 
@@ -34,10 +26,7 @@ Code :
  
 Fonctionnalités :
 
- - Mettre les images pour les pièces
  - Faire en sorte que le joueur meurt quand il touche un pique ou tombe dans le vide
  - Revenir au menu quand le joueur meurt
  - Ajouter un menu
  - Pouvoir quitter le jeu
- - Pouvoir varier la longueur du saut (si on garde espace enfoncé)
- - Certains patterns ne sont pas cohérents/sont trop difficiles/ont des problèmes d'images

@@ -19,7 +19,7 @@ public class DashWindow extends GameWindow{
 	public DashWindow(String gameName, GameCanvas gameCanvas, GameData data) {
 		super(gameName, gameCanvas, data);
 		
-		GameLevel level=new GameLevelDash(data,50);
+		GameLevel level=new GameLevelDash(data,25);
 		data.addLevel(level);
 		GameDefaultImpl game=new GameDefaultImpl(data);
 		

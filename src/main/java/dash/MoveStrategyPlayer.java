@@ -13,7 +13,7 @@ public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 	private Player player;
 
 	public MoveStrategyPlayer(Player player,GameData data) {
-		super(new SpeedVector(new Point(24, 0)));
+		super(new SpeedVector(new Point(12, 0)));
 		int vitesse =((ConfigurationDash)data.getConfiguration()).getVitesse();
 		setSpeed(vitesse);
 		this.player=player;

@@ -26,6 +26,9 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	
 	private DrawableImage image;
 	
+	private int animationTick;
+	
+	private boolean dead;
 	
 	private Point2D.Double acceleration;
 	
@@ -33,6 +36,7 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		super();
 		ontheground=false;
 		slow = false;
+		dead = false;
 		
 		MoveStrategyPlayer moveStrategy=new MoveStrategyPlayer(this,data);
 		moveDriver.setStrategy(moveStrategy);
@@ -52,28 +56,28 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		this.acceleration = new Point2D.Double(0, 0);
 		
 		setPosition(new Point(500, 300));
+		animationTick = 0;
 	}
 	
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(getPosition().x+32,getPosition().y, 64, 128);
+		return new Rectangle(getPosition().x,getPosition().y, 64, 128);
 	}
 	
 	
 	@Override
 	public void draw(Graphics g) {
 		
-		sprite.draw(g, new Point(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY()),40,40);
+		sprite.draw(g, new Point(getPosition().x-Camera.getInstance().getX()-32,getPosition().y-Camera.getInstance().getY()),40,40);
 		
 		// hit box
-		g.drawRect(getPosition().x-Camera.getInstance().getX()+32,getPosition().y-Camera.getInstance().getY(),64, 128);
+		g.drawRect(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY(),64, 128);
 	}
 	
 	@Override
 	public void oneStepMove(){
 		ontheground = false;
 		super.oneStepMove();
-		System.out.println(position.x);
 	}
 	
 	@Override
@@ -87,7 +91,10 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 			this.sprite.setType("course");
 			this.sprite.reset();
 		}
-		this.sprite.increment();	
+		if(animationTick%2==0){
+			this.sprite.increment();	
+		}
+		animationTick++;
 	}
 
 	private void applyGravity() {	
@@ -96,7 +103,8 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		}else{			
 			this.acceleration.y+=0.5;
 		}
-		this.getSpeedVector().getDirection().y+=Math.ceil(this.acceleration.y);			
+		this.getSpeedVector().getDirection().y+=Math.ceil(this.acceleration.y);		
+		this.getSpeedVector().getDirection().y=Math.min(this.getSpeedVector().getDirection().y,40);
 	}
 
 	public int jump() {
@@ -118,7 +126,17 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	}
 	
 	public void kill(){
+		if(dead){
+			return;
+		}
+		dead = true;
+		getSpeedVector().getDirection().x = -10;
+		getSpeedVector().getDirection().y = -20;
 		sprite.setType("saut");
+	}
+	
+	public boolean isDead() {
+		return dead;
 	}
 	
 }

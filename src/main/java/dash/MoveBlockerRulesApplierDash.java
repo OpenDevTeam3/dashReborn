@@ -13,11 +13,18 @@ public class MoveBlockerRulesApplierDash extends MoveBlockerRulesApplierDefaultI
 	 */
 	public void moveBlockerRule(Player player, BlockTerrain blocker){
 		
-		player.getSpeedVector().getDirection().y=10;
-		player.getPosition().y=(int) (blocker.getPosition().y-player.getBoundingBox().getHeight()-player.getSpeedVector().getDirection().y);
+		if(player.isDead())
+			return;
+		
+		player.getSpeedVector().getDirection().y=5;
+		player.getPosition().y=(int) (blocker.getPosition().y-player.getBoundingBox().getHeight());
 		//permet au joueur de sauter à nouveau
 		player.setOntheground();
 		
+	}
+	
+	public void moveBlockerRule(Player player, BlockTerrainWall wall){
+		player.kill();
 	}
 	
 	public void moveBlockerRule(Player player, BlockTerrainDie trap){
@@ -29,11 +36,7 @@ public class MoveBlockerRulesApplierDash extends MoveBlockerRulesApplierDefaultI
 	}
 	
 	public void moveBlockerRule(Player player, BlockJohnCena trou){
-		System.out.println("ok");
 		player.kill();
-		player.getPosition().x = trou.getPosition().x;
-		player.getSpeedVector().getDirection().x = 0;
-		System.out.println(player.getPosition().x);
 	}
 	
 	
