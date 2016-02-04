@@ -28,16 +28,16 @@ public class MoveBlockerRulesApplierDash extends MoveBlockerRulesApplierDefaultI
 	}
 	
 	public void moveBlockerRule(Player player, BlockTerrainDie trap){
-		System.exit(0);
+		player.kill();
 	}
 	
 	public void moveBlockerRule(Player movable, Piece piece){
 		piece.addscore();
 	}
 	
-	public void moveBlockerRule(Player player, BlockJohnCena trou){
-		player.kill();
+	public void moveBlockerRule(Player player, BlockJohnCena andHisNameIs){
+		System.out.println("ok");
+		andHisNameIs.johnCena();
 	}
-	
 	
 }

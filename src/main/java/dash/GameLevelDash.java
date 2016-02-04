@@ -1,5 +1,6 @@
 package dash;
 
+import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
 
@@ -13,6 +14,10 @@ public class GameLevelDash extends GameLevelDefaultImpl {
 	@Override
 	protected void init() {
 		gameBoard=new GameUniverseViewPortDash(data);
+	}
+	
+	public GameUniverseViewPort getBoard(){
+		return gameBoard;
 	}
 
 }

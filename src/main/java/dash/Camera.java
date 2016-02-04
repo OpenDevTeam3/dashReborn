@@ -49,8 +49,7 @@ public class Camera {
 			if(tmp instanceof BlockTerrain && ((BlockTerrain) tmp).getPosition().x+500<position.x){
 				data.getUniverse().removeGameEntity(tmp);
 			}else if(tmp instanceof Player){
-				setCameraOnPlayer((Player)tmp);
-				
+				setCameraOnPlayer((Player)tmp);	
 			}
 		}
 		generateurTerrain.generate(position.x);
@@ -60,8 +59,8 @@ public class Camera {
 		if(player.isDead()){
 			return;
 		}
-		position.x+=player.getSpeedVector().getDirection().x*speed;
-		position.y=player.getPosition().y-300;
+		position.x=player.getPosition().x-200;
+		position.y=player.getPosition().y/3;
 	}
 	
 	

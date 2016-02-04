@@ -15,7 +15,9 @@ import java.util.Iterator;
 public class GameUniverseViewPortDash implements GameUniverseViewPort {
 
 	private Image buffer;
+	
 	protected BackgroundImage background;
+	
 	protected GameData data;
 	
 	protected URL backgroundImage(String path) {
@@ -76,8 +78,7 @@ public class GameUniverseViewPortDash implements GameUniverseViewPort {
 
 	@Override
 	public void setBackgroundImage(String path) {
-		// TODO Auto-generated method stub
-		
+		background = new BackgroundImage(path, getCanvas());
 	}
 }
 

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 
 public class PatternTerrain {
+	
+	private int size;
 
 	private ArrayList<BlockTerrain> pattern=new ArrayList<BlockTerrain>();
 	
@@ -17,7 +19,7 @@ public class PatternTerrain {
 			File f=new File("src/main/resources/patterns/"+csv);
 			FileReader ips = new FileReader(f);
 			BufferedReader in = new BufferedReader(ips);
-			String[] lineblocks;
+			String[] lineblocks = null;
 			String s;
 			BlockTerrain block;
 			for(int i=0;(s=in.readLine())!=null;i++){
@@ -28,7 +30,7 @@ public class PatternTerrain {
 							pattern.add(block);
 				}
 			}
-				
+			size=lineblocks.length;	
 			ips.close();
 			in.close();
 		} catch (Exception e) {
@@ -59,16 +61,30 @@ public class PatternTerrain {
 		   case "5":
 		    return new Piece(data, idblock, variable,x,y);
 		   case "6":
-		    return new BlockJohnCena(data, idblock, variable, x, y);
+			    return new BlockJohnCena(data, idblock, variable,x,y);
 		  }
 		  return null;
 	}
 	
-	public ArrayList<BlockTerrain> getPatern() {
+	/**
+	 * Retourne une liste de blocs composant un pattern.
+	 * Les blocs retournés sont des clones des blocs du pattern.
+	 * 
+	 * @return la liste des blocs contenus dans le pattern
+	 */
+	public ArrayList<BlockTerrain> getPattern() {
 		ArrayList<BlockTerrain> list =new ArrayList<BlockTerrain>();
-		
 		for(BlockTerrain bt : pattern)
 			list.add(bt.duplique());
 		return list;
+	}
+	
+	/**
+	 * Retourne le nombre de blocs du pattern en longueur.
+	 * 
+	 * @return la longueur du pattern
+	 */
+	public int getSize() {
+		return size;
 	}
 }

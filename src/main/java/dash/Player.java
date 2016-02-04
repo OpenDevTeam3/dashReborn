@@ -32,6 +32,8 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	
 	private Point2D.Double acceleration;
 	
+	private GameData data;
+	
 	public Player(GameCanvas gameCanvas,GameData data) {
 		super();
 		ontheground=false;
@@ -54,8 +56,9 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		this.sprite.setTypes("course","saut");
 		this.sprite.setType("course");
 		this.acceleration = new Point2D.Double(0, 0);
+		this.data = data;
 		
-		setPosition(new Point(500, 300));
+		setPosition(new Point(200, 100));
 		animationTick = 0;
 	}
 	
@@ -71,7 +74,7 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		sprite.draw(g, new Point(getPosition().x-Camera.getInstance().getX()-32,getPosition().y-Camera.getInstance().getY()),40,40);
 		
 		// hit box
-		g.drawRect(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY(),64, 128);
+		//g.drawRect(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY(),64, 128);
 	}
 	
 	@Override
@@ -84,8 +87,15 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	public void oneStepMoveAddedBehavior() {
 		setSprite();
 		applyGravity();
+		checkBoundaries();
 	}
 	
+	private void checkBoundaries() {
+		if(position.y > 800){
+			kill();
+		}
+	}
+
 	private void setSprite() {
 		if(animenormal && (anime++)==9){
 			this.sprite.setType("course");
@@ -133,6 +143,8 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		getSpeedVector().getDirection().x = -10;
 		getSpeedVector().getDirection().y = -20;
 		sprite.setType("saut");
+		data.getEndOfGame().setValue(true);
+		
 	}
 	
 	public boolean isDead() {

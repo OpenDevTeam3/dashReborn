@@ -12,7 +12,7 @@ public class Piece extends BlockTerrain {
 	}
 
 	public void addscore(){
-		data.getScore().setValue(data.getScore().getValue()+DEFAULT_PIECE_SCORE);
+		((ConfigurationDash) data.getConfiguration()).getScore().addScore(DEFAULT_PIECE_SCORE);
 		data.getUniverse().removeGameEntity(this);
 	}
 	
