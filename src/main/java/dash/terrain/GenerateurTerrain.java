@@ -1,10 +1,13 @@
-package dash;
+package dash.terrain;
 
 import gameframework.game.GameData;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+
+import dash.block.Platform;
+import dash.game.ConfigurationDash;
 
 
 public class GenerateurTerrain {
@@ -29,10 +32,14 @@ public class GenerateurTerrain {
 		genPosX = 0;
 		random = new Random();
 		patternTerrains = new ArrayList<PatternTerrain>();
-		patternTerrains.add(new PatternTerrain("pattern1.csv", data));
-		patternTerrains.add(new PatternTerrain("pattern2.csv", data));
-		patternTerrains.add(new PatternTerrain("pattern5.csv", data));
-		patternTerrains.add(new PatternTerrain("pattern6.csv", data));
+		patternTerrains.add(new PatternTerrain("pattern8.csv", data));
+		patternTerrains.add(new PatternTerrain("pattern9.csv", data));
+		patternTerrains.add(new PatternTerrain("pattern10.csv", data));
+		patternTerrains.add(new PatternTerrain("pattern11.csv", data));
+		patternTerrains.add(new PatternTerrain("pattern12.csv", data));
+		patternTerrains.add(new PatternTerrain("pattern13.csv", data));
+		patternTerrains.add(new PatternTerrain("pattern14.csv", data));
+		
 	}
 	
 	/**
@@ -61,15 +68,19 @@ public class GenerateurTerrain {
 	 * @param pattern le pattern de bloc
 	 */
 	public void generateTerrain(PatternTerrain pattern){
-		ArrayList<BlockTerrain> bts= pattern.getPattern();
-		BlockTerrain block;
-		Iterator<BlockTerrain> bt=bts.iterator();
+		ArrayList<Platform> bts= pattern.getPattern();
+		Platform block;
+		Iterator<Platform> bt=bts.iterator();
 		while(bt.hasNext()) {
 			block=bt.next();
-			block.setPositionCamera(genPosX);
+			block.offset(genPosX);
 			data.getUniverse().addGameEntity(block);
 		}
 		genPosX+=pattern.getSize()*((ConfigurationDash)data.getConfiguration()).getBlockSize();
 		
+	}
+
+	public void reset() {
+		genPosX = 0;
 	}
 }

@@ -1,4 +1,4 @@
-package dash;
+package dash.util;
 
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyKeyboard;
@@ -7,13 +7,16 @@ import gameframework.motion.SpeedVector;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 
+import dash.entities.Player;
+import dash.game.ConfigurationDash;
+
 
 public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 	
 	private Player player;
 
 	public MoveStrategyPlayer(Player player,GameData data) {
-		super(new SpeedVector(new Point(12, 0)));
+		super(new SpeedVector(new Point(1, 0)));
 		int vitesse =((ConfigurationDash)data.getConfiguration()).getVitesse();
 		setSpeed(vitesse);
 		this.player=player;
@@ -32,7 +35,7 @@ public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 			case KeyEvent.VK_SPACE:
 				if(player.isOntheGround()){
 					y=player.jump();
-					player.slow = true;
+					player.setSlow(true);
 				}
 				break;
 			default:
@@ -62,11 +65,16 @@ public class MoveStrategyPlayer extends MoveStrategyKeyboard {
 	public void keyReleased(int keyCode) {
 		switch(keyCode){
 			case KeyEvent.VK_SPACE:
-				player.slow = false;
+				player.setSlow(false);
 				break;
 			default:
 				return;
 		}
+	}
+
+	public void setDirectionX(int x) {
+		SpeedVector v = super.speedVector;
+		v.getDirection().x = x;
 	}
 
 }

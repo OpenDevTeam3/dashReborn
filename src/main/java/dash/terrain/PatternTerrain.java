@@ -1,4 +1,4 @@
-package dash;
+package dash.terrain;
 
 import gameframework.game.GameData;
 
@@ -7,12 +7,18 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import dash.block.BlockJohnCena;
+import dash.block.Platform;
+import dash.block.Trap;
+import dash.block.Wall;
+import dash.block.Coin;
+
 
 public class PatternTerrain {
 	
 	private int size;
 
-	private ArrayList<BlockTerrain> pattern=new ArrayList<BlockTerrain>();
+	private ArrayList<Platform> pattern=new ArrayList<Platform>();
 	
 	public PatternTerrain(String csv,GameData data) {
 		try{
@@ -21,7 +27,7 @@ public class PatternTerrain {
 			BufferedReader in = new BufferedReader(ips);
 			String[] lineblocks = null;
 			String s;
-			BlockTerrain block;
+			Platform block;
 			for(int i=0;(s=in.readLine())!=null;i++){
 				lineblocks = s.split(";");
 				for(int j=0;j<lineblocks.length;j++){
@@ -39,7 +45,7 @@ public class PatternTerrain {
 		}
 	}
 
-	private BlockTerrain createblock(String s,GameData data,int x,int y) {
+	private Platform createblock(String s,GameData data,int x,int y) {
 		String idblock=s.split(",")[0].split(":")[0];
 		  int variable=0;
 		  int isWall=0;
@@ -54,12 +60,12 @@ public class PatternTerrain {
 		   case "2":
 		   case "3":
 		    if(isWall==1)
-		     return new BlockTerrainWall(data, idblock, variable, x, y);
-		    return new BlockTerrain(data, idblock, variable,x,y);
+		     return new Wall(data, idblock, variable, x, y);
+		    return new Platform(data, idblock, variable,x,y);
 		   case "4":
-		    return new BlockTerrainDie(data, idblock, variable,x,y);
+		    return new Trap(data, idblock, variable,x,y);
 		   case "5":
-		    return new Piece(data, idblock, variable,x,y);
+		    return new Coin(data, idblock, variable,x,y);
 		   case "6":
 			    return new BlockJohnCena(data, idblock, variable,x,y);
 		  }
@@ -72,9 +78,9 @@ public class PatternTerrain {
 	 * 
 	 * @return la liste des blocs contenus dans le pattern
 	 */
-	public ArrayList<BlockTerrain> getPattern() {
-		ArrayList<BlockTerrain> list =new ArrayList<BlockTerrain>();
-		for(BlockTerrain bt : pattern)
+	public ArrayList<Platform> getPattern() {
+		ArrayList<Platform> list =new ArrayList<Platform>();
+		for(Platform bt : pattern)
 			list.add(bt.duplique());
 		return list;
 	}

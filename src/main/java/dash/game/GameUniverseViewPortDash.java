@@ -1,4 +1,4 @@
-package dash;
+package dash.game;
 
 import gameframework.drawing.BackgroundImage;
 import gameframework.drawing.GameCanvas;
@@ -6,11 +6,13 @@ import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameEntity;
 import gameframework.game.GameUniverse;
-	
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.net.URL;
 import java.util.Iterator;
+
+import dash.entities.Player;
 	
 public class GameUniverseViewPortDash implements GameUniverseViewPort {
 
@@ -38,7 +40,6 @@ public class GameUniverseViewPortDash implements GameUniverseViewPort {
 	public void paint() {
 		background.draw(getBufferGraphics());
 		Iterator<GameEntity> gt = getUniverse().getGameEntitiesIterator();
-		Camera.getInstance().moveCamera();
 		Player player = null;
 		for (; gt.hasNext();) {
 			GameEntity tmp = gt.next();
@@ -48,7 +49,8 @@ public class GameUniverseViewPortDash implements GameUniverseViewPort {
 				tmp.draw(getBufferGraphics());
 			}
 		}
-		player.draw(getBufferGraphics());
+		if(player != null)
+			player.draw(getBufferGraphics());
 		refresh();
 	}
 	

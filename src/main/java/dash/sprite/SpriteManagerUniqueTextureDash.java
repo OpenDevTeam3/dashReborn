@@ -1,4 +1,4 @@
-package dash;
+package dash.sprite;
 
 import gameframework.drawing.DrawableImage;
 import gameframework.drawing.SpriteManager;
@@ -9,18 +9,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class SpriteManagerVariationTextureDash implements SpriteManager{
+public class SpriteManagerUniqueTextureDash implements SpriteManager{
 
 	private final DrawableImage image;
-	private Map<String, Integer> types;
-	private int spriteNumber;
-	private final int renderingSize;
-	private int spriteWight;
-	private int spriteHeight;
-	private int nbSpriteCol;
-	private int variation;
 	
-	public SpriteManagerVariationTextureDash(DrawableImage image, int renderingSize,int nbSpriteCol,int nbSpriteLine) {
+	private Map<String, Integer> types;
+	
+	private int spriteNumber;
+	
+	private final int renderingSize;
+	
+	private int spriteWight;
+	
+	private int spriteHeight;
+	
+	private int nbSpriteCol;
+	
+	public SpriteManagerUniqueTextureDash(DrawableImage image, int renderingSize,int nbSpriteCol,int nbSpriteLine) {
 		this.renderingSize = renderingSize;
 		this.image = image;
 		this.nbSpriteCol=nbSpriteCol;
@@ -47,8 +52,8 @@ public class SpriteManagerVariationTextureDash implements SpriteManager{
 		int dy2 = dy1 + renderingSize;
 
 		// Source image coordinates
-		int sx1 = variation * spriteWight;
-		int sy1 = spriteNumber * spriteHeight;
+		int sx1 = (spriteNumber%nbSpriteCol) * spriteWight;
+		int sy1 = (spriteNumber/nbSpriteCol) * spriteHeight;
 		int sx2 = sx1 + spriteWight;
 		int sy2 = sy1 + spriteHeight;
 		
@@ -64,7 +69,7 @@ public class SpriteManagerVariationTextureDash implements SpriteManager{
 		int dy2 = dy1 + renderingSize;
 
 		// Source image coordinates
-		int sx1 = variation * width;
+		int sx1 = spriteNumber * width;
 		int sy1 = spriteNumber * height;
 		int sx2 = sx1 + width;
 		int sy2 = sy1 + height;
@@ -75,22 +80,11 @@ public class SpriteManagerVariationTextureDash implements SpriteManager{
 
 	@Override
 	public void setType(String type) {
-		setType(type,0);
-	}
-	
-	public void setType(String type, int variation) {
-		
 		if (!types.containsKey(type)) {
-			//throw new IllegalArgumentException(type
-			//		+ " is not a valid type for this sprite manager.");
-			reset();
-		}else{
-		
-			spriteNumber = types.get(type);
-			if(variation<nbSpriteCol)
-				this.variation = variation;
+			throw new IllegalArgumentException(type
+					+ " is not a valid type for this sprite manager.");
 		}
-		
+		this.spriteNumber = types.get(type);
 	}
 
 	@Override
@@ -101,14 +95,11 @@ public class SpriteManagerVariationTextureDash implements SpriteManager{
 	@Override
 	public void reset() {
 		spriteNumber = 0;
-		variation = 0 ;
 	}
 
 	@Override
 	public void setIncrement(int increment) {
 		this.spriteNumber = increment;
 	}
-
-	
 
 }

@@ -1,4 +1,4 @@
-package dash;
+package dash.entities;
 
 import gameframework.drawing.Drawable;
 import gameframework.drawing.DrawableImage;
@@ -13,16 +13,26 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
+import dash.game.ConfigurationDash;
+import dash.sprite.SpriteManagerDash;
+import dash.util.Camera;
+import dash.util.MoveStrategyPlayer;
 
+/**
+ * La class Player permet d'instancier un personnage de jeu.
+ * 
+ * @author lucasmouradeoliveira
+ *
+ */
 public class Player extends GameMovable implements GameEntity,Drawable,MoveBlocker{
 
 	private SpriteManagerDash sprite;
 	
 	private int anime=0;
 	
-	private boolean animenormal=false;
+	private boolean animenormal;
 	
-	protected boolean ontheground, slow;
+	private boolean ontheground, slow;
 	
 	private DrawableImage image;
 	
@@ -34,32 +44,48 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	
 	private GameData data;
 	
+	private ConfigurationDash config;
+	
+	private Camera camera;
+	
+	private MoveStrategyPlayer moveStrategy;
+	
 	public Player(GameCanvas gameCanvas,GameData data) {
 		super();
-		ontheground=false;
-		slow = false;
-		dead = false;
+		this.data = data;
+		this.config = ((ConfigurationDash) data.getConfiguration());
+		this.camera = config.getCamera();
 		
-		MoveStrategyPlayer moveStrategy=new MoveStrategyPlayer(this,data);
-		moveDriver.setStrategy(moveStrategy);
+		this.initState();
+		this.image = new DrawableImage("../../spriteBOB.png", gameCanvas);
+		this.initSprite();
+		this.initMoveStrategy();
 		
-		gameCanvas.addKeyListener(moveStrategy);
-		
-		
-		moveDriver.setmoveBlockerChecker(data.getMoveBlockerChecker());
-		
-		
-		//this.gameCanvas=gameCanvas;
-		image = new DrawableImage("../../spriteBOB.png", gameCanvas);
-		
+	}
+	
+	/**
+	 * Initialise l'état des animations du joueur.
+	 */
+	public void initState(){
+		this.animenormal = false;
+		this.ontheground = false;
+		this.slow = false;
+		this.dead = false;
+		this.acceleration = new Point2D.Double(0, 0);
+		this.animationTick = 0;
+	}
+	
+	private void initSprite(){	
 		this.sprite = new SpriteManagerDash(image, 128, 8);
 		this.sprite.setTypes("course","saut");
 		this.sprite.setType("course");
-		this.acceleration = new Point2D.Double(0, 0);
-		this.data = data;
-		
-		setPosition(new Point(200, 100));
-		animationTick = 0;
+	}
+	
+	private void initMoveStrategy(){
+		this.moveStrategy=new MoveStrategyPlayer(this,data);
+		this.moveDriver.setStrategy(moveStrategy);
+		this.data.getCanvas().addKeyListener(moveStrategy);
+		this.moveDriver.setmoveBlockerChecker(data.getMoveBlockerChecker());
 	}
 	
 	@Override
@@ -70,11 +96,7 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	
 	@Override
 	public void draw(Graphics g) {
-		
-		sprite.draw(g, new Point(getPosition().x-Camera.getInstance().getX()-32,getPosition().y-Camera.getInstance().getY()),40,40);
-		
-		// hit box
-		//g.drawRect(getPosition().x-Camera.getInstance().getX(),getPosition().y-Camera.getInstance().getY(),64, 128);
+		sprite.draw(g, new Point(getPosition().x-camera.getX()-32,getPosition().y-camera.getY()),40,40);
 	}
 	
 	@Override
@@ -90,6 +112,9 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		checkBoundaries();
 	}
 	
+	/**
+	 * Vérifie si le joueur est tombé dans le vide. Si c'est le cas, il est tué.
+	 */
 	private void checkBoundaries() {
 		if(position.y > 800){
 			kill();
@@ -135,10 +160,12 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 		this.acceleration.y=0;
 	}
 	
+	/**
+	 * Tue le joueur et lui fait faire une petite animation de bond en arrière.
+	 */
 	public void kill(){
-		if(dead){
+		if(dead)
 			return;
-		}
 		dead = true;
 		getSpeedVector().getDirection().x = -10;
 		getSpeedVector().getDirection().y = -20;
@@ -149,6 +176,23 @@ public class Player extends GameMovable implements GameEntity,Drawable,MoveBlock
 	
 	public boolean isDead() {
 		return dead;
+	}
+	
+	public boolean isSlow(){
+		return slow;
+	}
+
+	public void setSlow(boolean slow) {
+		this.slow = slow;
+	}
+	
+	public void accelerate(){
+		this.acceleration.x+=config.getAccelerationSpeed();
+		if(this.acceleration.x > 1){
+			this.acceleration.x = 0;
+			int x = Math.min(12, moveStrategy.getSpeedVector().getDirection().x+1);
+			moveStrategy.setDirectionX(x);
+		}
 	}
 	
 }

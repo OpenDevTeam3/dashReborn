@@ -1,5 +1,7 @@
-package dash;
+package dash.window;
 
+import dash.game.ConfigurationDash;
+import dash.game.DashGame;
 import gameframework.drawing.GameCanvas;
 import gameframework.game.GameData;
 import gameframework.gui.GameWindow;
