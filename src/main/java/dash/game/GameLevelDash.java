@@ -2,12 +2,13 @@ package dash.game;
 
 import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
+import gameframework.game.GameLevel;
 import gameframework.game.GameUniverse;
 import dash.entities.Player;
 import dash.terrain.GenerateurTerrain;
 import dash.util.Camera;
 
-public class GameLevelDash extends Thread{
+public class GameLevelDash extends Thread implements GameLevel{
 	
 	protected GameData data;
 	
@@ -98,9 +99,22 @@ public class GameLevelDash extends Thread{
 		generateur.generate(camera.getX());
 		player.accelerate();
 	}
-
-	public void restart() {
-		this.endLevel = true;
+	
+	@Override
+	public void end(){
+		Runnable r = new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				endLevel = true;
+			}
+		};
+		new Thread(r).start();
 	}
 
 }

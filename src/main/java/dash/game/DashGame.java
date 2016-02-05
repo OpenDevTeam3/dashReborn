@@ -32,7 +32,7 @@ public class DashGame implements Game, Observer{
 	@Override 
 	public void update(Observable o, Object arg){
 		if(data.getEndOfGame().getValue()){
-			this.currentPlayedLevel.restart();
+			this.currentPlayedLevel.end();
 		}
 	}
 
